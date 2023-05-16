@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/exitFragment"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    tools:context=".ExitFragment">
+    tools:context=".fragments.ExitFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_margin="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Вы действительно хотите выйти?"
-            android:textSize="20sp"
-            />
-        <Button
-            android:id="@+id/yesExitFragment"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="YES"/>
-        <Button
-            android:id="@+id/noExitFragment"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="NO"/>
+            android:textSize="20sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <Button
+                android:id="@+id/yesExitFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="YES"
+                android:layout_marginRight="64dp"/>
+            <Button
+                android:id="@+id/noExitFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="NO"/>
+        </LinearLayout>
+
 
 
     </LinearLayout>

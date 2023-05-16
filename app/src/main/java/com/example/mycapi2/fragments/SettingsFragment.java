@@ -1,4 +1,4 @@
-package com.example.mycapi2;
+package com.example.mycapi2.fragments;
 
 import android.os.Bundle;
 
