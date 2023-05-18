@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:background="@drawable/back2"
     android:orientation="vertical"
@@ -42,6 +43,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="PLAY" />
+        <Button
+            android:id="@+id/highscore_btn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="HIGH SCORE" />
 
         <Button
             android:id="@+id/settings_btn"
@@ -58,6 +65,7 @@
             android:text="EXIT" />
 
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

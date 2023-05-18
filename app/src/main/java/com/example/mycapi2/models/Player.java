@@ -1,4 +1,4 @@
-package com.example.mycapi2;
+package com.example.mycapi2.models;
 
 public class Player
 {
@@ -7,17 +7,13 @@ public class Player
     private int foodStats = 100;
     private int cleanStats = 100;
     private int enjoyStats = 100;
-    private int addStats = 10;
-    private int countdownTime = 40;
 
-    public Player(int healthStats, int foodStats, int cleanStats, int enjoyStats, int addStats, int countdownTime)
+    public Player(int healthStats, int foodStats, int cleanStats, int enjoyStats)
     {
         this.healthStats = healthStats;
         this.foodStats = foodStats;
         this.cleanStats = cleanStats;
         this.enjoyStats = enjoyStats;
-        this.addStats = addStats;
-        this.countdownTime = countdownTime;
     }
 
     public Player()
@@ -85,23 +81,5 @@ public class Player
         this.enjoyStats -= enjoyStats;
     }
 
-    public int getAddStats()
-    {
-        return addStats;
-    }
 
-    public void setAddStats(int addStats)
-    {
-        this.addStats = addStats;
-    }
-
-    public int getCountdownTime()
-    {
-        return countdownTime;
-    }
-
-    public void setCountdownTime(int countdownTime)
-    {
-        this.countdownTime = countdownTime;
-    }
 }

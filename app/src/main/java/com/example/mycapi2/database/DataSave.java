@@ -1,10 +1,5 @@
 package com.example.mycapi2.database;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
-import com.example.mycapi2.Player;
-
 public class DataSave
 {
     public static final String DATA_PREFS = "DATA_PREFS";
@@ -22,7 +17,7 @@ public class DataSave
     public static final String STATS_COEFF_KEY = "STATS_COEFF";
     public static final String DOWN_TIME_KEY = "DOWN_TIME";
 
-    public static void save(Context context,
+    /*public static void save(Context context,
                             Data data)
     {
         SharedPreferences preferences = context.getSharedPreferences(DATA_PREFS,
@@ -48,5 +43,5 @@ public class DataSave
                              preferences.getInt(STATS_COEFF_KEY, 0),
                              preferences.getInt(DOWN_TIME_KEY, 0),
                              new Player());
-    }
+    }*/
 }

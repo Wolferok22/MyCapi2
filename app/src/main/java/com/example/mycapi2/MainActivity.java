@@ -4,12 +4,16 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.mycapi2.database.ShopProductsRepo;
 import com.example.mycapi2.databinding.ActivityMainBinding;
 import com.example.mycapi2.fragments.ExitFragment;
 import com.example.mycapi2.fragments.GameFragment;
 import com.example.mycapi2.fragments.MainFragment;
+import com.example.mycapi2.models.Player;
 import com.example.mycapi2.threads.ScoreThread;
+import com.example.mycapi2.viewmodels.MainViewModel;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -30,6 +34,11 @@ public class MainActivity extends AppCompatActivity
                 .beginTransaction()
                 .replace(binding.rootContainer.getId(), fragment, String.valueOf(false))
                 .commit();
+        ShopProductsRepo.getInstance().setResources(getResources());
+        ShopProductsRepo.getInstance().init();
+        MainViewModel mainViewModel = new ViewModelProvider(this).get(
+                MainViewModel.class);
+        mainViewModel.setPlayer(new Player());
 
     }
 

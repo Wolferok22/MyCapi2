@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mycapi2.R;
-import com.example.mycapi2.database.DataSave;
 import com.example.mycapi2.databinding.FragmentMainBinding;
 
 
@@ -34,7 +33,6 @@ public class MainFragment extends Fragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
-        super.onViewCreated(view, savedInstanceState);
         binding.exitBtn.setOnClickListener(v -> gameExit());
         binding.playBtn.setOnClickListener(v -> gameStart());
         binding.settingsBtn.setOnClickListener(v -> gameSettings());

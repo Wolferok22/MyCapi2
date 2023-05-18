@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">MyCapi2</string>
+    <string name="app_name" translatable="false">MyCapi2</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="score">SCORE:</string>
+    <string name="shop">SHOP</string>
+    <string name="increase_add_stats">INCREASE ADD STATS</string>
+    <string name="decrease_countdown_time">DECREASE COUNTDOWN TIME</string>
+    <string name="high_score">HIGH SCORES</string>
+
 </resources>

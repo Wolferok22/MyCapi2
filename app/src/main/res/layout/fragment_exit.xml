@@ -26,17 +26,22 @@
             >
             <Button
                 android:id="@+id/yesExitFragment"
-                android:layout_width="wrap_content"
+                android:layout_width="148dp"
                 android:layout_height="match_parent"
-                android:text="YES"
-                android:layout_marginRight="64dp"/>
+                android:text="SAVE AND EXIT"
+                android:layout_marginRight="8dp"/>
             <Button
-                android:id="@+id/noExitFragment"
-                android:layout_width="wrap_content"
+                android:id="@+id/finishGame"
+                android:layout_width="148dp"
                 android:layout_height="match_parent"
-                android:text="NO"/>
-        </LinearLayout>
+                android:text="FINISH GAME"/>
 
+        </LinearLayout>
+        <Button
+            android:id="@+id/noExitFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="NO"/>
 
 
     </LinearLayout>

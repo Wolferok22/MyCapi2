@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyCapi2</string>
+    <string name="score">СЧЁТ:</string>
+    <string name="shop">МАГАЗИН</string>
+    <string name="increase_add_stats">УЛУЧШЕНИЕ КЛИКА</string>
+    <string name="decrease_countdown_time">УМЕНЬШЕНИЕ ЗАДЕРЖКИ</string>
+    <string name="high_score">РЕКОРДЫ</string>
+</resources>

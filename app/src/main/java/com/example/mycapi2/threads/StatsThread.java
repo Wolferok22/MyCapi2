@@ -3,16 +3,18 @@ package com.example.mycapi2.threads;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 
-import com.example.mycapi2.Player;
+import com.example.mycapi2.models.Player;
+import com.example.mycapi2.viewmodels.MainViewModel;
 
 public class StatsThread extends Thread
 {
     private static StatsThread instance;
-    private Player player;
     private int statsCoefficient = 1;
     private int statsDownTime = 0;
-    private int timeCoefficient = 1;
+    private MainViewModel mainViewModel;
     private OnUpdateStatsCallback onUpdateStatsCallback;
     private boolean running;
 
@@ -20,11 +22,12 @@ public class StatsThread extends Thread
     {
     }
 
-    public static StatsThread getInstance(@NonNull LifecycleOwner lifecycleOwner)
+    public static StatsThread getInstance(ViewModelStoreOwner viewModelStoreOwner, @NonNull LifecycleOwner lifecycleOwner)
     {
         if (instance == null)
         {
             instance = new StatsThread();
+            instance.mainViewModel = new ViewModelProvider(viewModelStoreOwner).get(MainViewModel.class);
 
             lifecycleOwner.getLifecycle().addObserver(new DefaultLifecycleObserver()
             {
@@ -52,18 +55,16 @@ public class StatsThread extends Thread
 
     private StatsThread reInstance()
     {
+
         StatsThread thread = new StatsThread();
-        thread.player = instance.player;
         thread.statsDownTime = instance.statsDownTime;
         thread.onUpdateStatsCallback = instance.onUpdateStatsCallback;
+        thread.mainViewModel = instance.mainViewModel;
+
 
         return thread;
     }
 
-    public void setPlayer(Player player)
-    {
-        this.player = player;
-    }
 
     public void setStatsDownTime(int statsDownTime)
     {
@@ -78,6 +79,10 @@ public class StatsThread extends Thread
     @Override
     public void run()
     {
+        Player player = mainViewModel.getPlayer();
+        if (player == null){
+            return;
+        }
         while (running)
         {
             try
@@ -102,7 +107,7 @@ public class StatsThread extends Thread
                 {
                     onUpdateStatsCallback.onUpdate();
                 }
-                Thread.sleep(statsDownTime * timeCoefficient);
+                Thread.sleep((long) (statsDownTime * mainViewModel.getTimeCoefficient()));
             }
             catch (InterruptedException ignored)
             {

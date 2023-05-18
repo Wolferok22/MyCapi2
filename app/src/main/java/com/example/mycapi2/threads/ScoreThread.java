@@ -3,23 +3,33 @@ package com.example.mycapi2.threads;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+
+import com.example.mycapi2.fragments.MainFragment;
+import com.example.mycapi2.viewmodels.MainViewModel;
 
 public class ScoreThread extends Thread
 {
     private static ScoreThread instance;
-    private int score = 0;
     private boolean running = false;
     private OnScoreChangedListener onScoreChangedListener;
+    private MainViewModel mainViewModel;
+
+
 
     protected ScoreThread()
     {
     }
 
-    public static ScoreThread getInstance(LifecycleOwner lifecycleOwner)
+    public static ScoreThread getInstance(ViewModelStoreOwner viewModelStoreOwner, LifecycleOwner lifecycleOwner)
     {
         if (instance == null)
         {
             instance = new ScoreThread();
+            instance.mainViewModel = new ViewModelProvider(viewModelStoreOwner).get(
+                    MainViewModel.class);
+
 
             lifecycleOwner.getLifecycle().addObserver(new DefaultLifecycleObserver()
             {
@@ -48,8 +58,8 @@ public class ScoreThread extends Thread
     private ScoreThread reInstance()
     {
         ScoreThread thread = new ScoreThread();
-        thread.score = instance.score;
         thread.onScoreChangedListener = instance.onScoreChangedListener;
+        thread.mainViewModel = instance.mainViewModel;
 
         return thread;
     }
@@ -65,10 +75,10 @@ public class ScoreThread extends Thread
         running = true;
         while (running)
         {
-            score++;
+            mainViewModel.setScore(mainViewModel.getScore()+1);
             if (onScoreChangedListener != null)
             {
-                onScoreChangedListener.onChanged(score);
+                onScoreChangedListener.onChanged(mainViewModel.getScore());
             }
             try
             {
@@ -81,8 +91,11 @@ public class ScoreThread extends Thread
         }
     }
 
+
+
     public interface OnScoreChangedListener
     {
         void onChanged(int score);
     }
+
 }
