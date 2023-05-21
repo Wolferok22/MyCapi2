@@ -42,6 +42,7 @@ public class GameFragment extends Fragment
         GameFragment gameFragment = new GameFragment();
         gameFragment.setArguments(bundle);
         return gameFragment;
+
     }
 
     @Nullable
@@ -58,21 +59,21 @@ public class GameFragment extends Fragment
         MainViewModel mainViewModel = new ViewModelProvider(requireActivity()).get(
                 MainViewModel.class);
         Player player = mainViewModel.getPlayer();
-        scoreThread = ScoreThread.getInstance(requireActivity(),this);
+        scoreThread = ScoreThread.getInstance(requireActivity(), this);
         statsThread = StatsThread.getInstance(requireActivity(), this);
-        progressionThread = ProgressionThread.getInstance(this);
+        progressionThread = ProgressionThread.getInstance(requireActivity(),this);
 
         int mode = getArguments().getInt(MODE_KEY);
         switch (mode)
         {
             case EASY_MODE:
-                statsDownTime = 3000;
+                mainViewModel.setStatsDownTime(3000);
                 break;
             case MEDIUM_MODE:
-                statsDownTime = 1500;
+                mainViewModel.setStatsDownTime(1500);
                 break;
             case HARD_MODE:
-                statsDownTime = 500;
+                mainViewModel.setStatsDownTime(500);
                 break;
         }
 
@@ -84,7 +85,6 @@ public class GameFragment extends Fragment
                                     getText(R.string.score) + " " + score);
                         }));
 
-        statsThread.setStatsDownTime(statsDownTime);
         statsThread.setOnUpdateStatsCallback(
                 () -> binding.getRoot().post(
                         () ->
@@ -93,6 +93,11 @@ public class GameFragment extends Fragment
                             binding.foodStats.setText(String.valueOf(player.getFoodStats()));
                             binding.cleanStats.setText(String.valueOf(player.getCleanStats()));
                             binding.enjoyStats.setText(String.valueOf(player.getEnjoyStats()));
+                            setState(player);
+                            if (player.getHealthStats() == 0 || player.getFoodStats() == 0 || player.getCleanStats() == 0 || player.getEnjoyStats() == 0)
+                            {
+                                toGameOver();
+                            }
                         }));
 
         binding.addHealth.setOnClickListener(
@@ -114,7 +119,36 @@ public class GameFragment extends Fragment
                                                                           .addToBackStack(null)
                                                                           .commit());
 
+
     }
 
+    private void setState(Player player)
+    {
+        int state = player.getHealthStats() + player.getFoodStats() + player.getCleanStats() + player.getEnjoyStats();
+        if ((state / 4) <= 100 && state / 4 > 75)
+        {
+            binding.state.setImageResource(R.drawable.capi1);
+        }
+        if ((state / 4) <= 75 && state / 4 > 50)
+        {
+            binding.state.setImageResource(R.drawable.capi2);
+        }
+        if ((state / 4) <= 50 && state / 4 > 25)
+        {
+            binding.state.setImageResource(R.drawable.capi3);
+        }
+        if ((state / 4) <= 25)
+        {
+            binding.state.setImageResource(R.drawable.capi4);
+        }
 
+    }
+
+    private void toGameOver()
+    {
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.rootContainer, new GameOverFragment())
+                .commit();
+    }
 }

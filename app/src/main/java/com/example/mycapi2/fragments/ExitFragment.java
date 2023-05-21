@@ -8,16 +8,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.mycapi2.R;
+import com.example.mycapi2.database.save.Data;
+import com.example.mycapi2.database.save.PlayerPreferences;
 import com.example.mycapi2.threads.ScoreThread;
 import com.example.mycapi2.databinding.FragmentExitBinding;
+import com.example.mycapi2.viewmodels.MainViewModel;
 
 
 public class ExitFragment extends DialogFragment
 {
 
-    FragmentExitBinding binding;
+    private FragmentExitBinding binding;
 
     @Nullable
     @Override
@@ -31,21 +35,27 @@ public class ExitFragment extends DialogFragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
-        binding.noExitFragment.setOnClickListener(view1 ->
+        binding.noExitFragment.setOnClickListener(v ->
                                                   {
                                                       dismiss();
                                                   });
-        binding.yesExitFragment.setOnClickListener(view1 -> exitGame());
+        binding.yesExitFragment.setOnClickListener(v -> finishGame());
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void exitGame()
+    private void finishGame()
     {
+        MainViewModel mainViewModel = new ViewModelProvider(requireActivity()).get(
+                MainViewModel.class);
+        mainViewModel.insert(new Data(mainViewModel.getScore()));
         MainFragment mainFragment = new MainFragment();
         getParentFragmentManager()
                 .beginTransaction()
                 .replace(R.id.rootContainer, mainFragment, String.valueOf(false))
                 .commit();
         dismiss();
+
     }
+
+
 }

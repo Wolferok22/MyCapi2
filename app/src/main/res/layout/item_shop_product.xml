@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="CURRENT LEVEL: "
+                android:text="@string/current_level"
                 android:textSize="16sp" />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="PRICE: "
+                android:text="@string/price"
                 android:textSize="16sp" />
         </LinearLayout>
 

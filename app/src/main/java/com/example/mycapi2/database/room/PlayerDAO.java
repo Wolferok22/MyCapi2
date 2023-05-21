@@ -6,14 +6,13 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.mycapi2.database.Data;
+import com.example.mycapi2.database.save.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao public interface PlayerDAO
 {
-    @Query("SELECT ID, SCORE FROM data")
+    @Query("SELECT * FROM data")
     List<Data> getAll();
 
     @Update

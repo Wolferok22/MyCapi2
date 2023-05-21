@@ -22,6 +22,11 @@ public class ScoreThread extends Thread
     {
     }
 
+    public static void setInstance(ScoreThread instance)
+    {
+        ScoreThread.instance = instance;
+    }
+
     public static ScoreThread getInstance(ViewModelStoreOwner viewModelStoreOwner, LifecycleOwner lifecycleOwner)
     {
         if (instance == null)

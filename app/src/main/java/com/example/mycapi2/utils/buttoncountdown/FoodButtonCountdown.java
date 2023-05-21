@@ -21,4 +21,17 @@ public class FoodButtonCountdown extends ButtonCountdown
         Player player = mainViewModel.getPlayer();
         player.setFoodStats(Math.min(player.getFoodStats() + mainViewModel.getClickPower(), 100));
     }
+    @Override
+    protected void startTimer()
+    {
+        new ButtonCountdown.CountDownTimer(mainViewModel.getClickCountdown() * 1000L, 1000)
+        {
+            @Override
+            public void onTick(long l)
+            {
+                super.onTick(l);
+                mainViewModel.incrementCurrentFoodCountdown();
+            }
+        }.start();
+    }
 }

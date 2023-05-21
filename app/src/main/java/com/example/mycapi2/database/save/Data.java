@@ -1,4 +1,4 @@
-package com.example.mycapi2.database;
+package com.example.mycapi2.database.save;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
@@ -14,8 +14,6 @@ import com.example.mycapi2.models.Player;
     private final int timeCoefficient;
     @Ignore
     private final int statsCoefficient;
-    @Embedded
-    private Player player;
     @ColumnInfo(name = "SCORE")
     private int score;
     @PrimaryKey(autoGenerate = true)
@@ -23,19 +21,24 @@ import com.example.mycapi2.models.Player;
     private int id;
 
     @Ignore
-    public Data(int score, int timeCoefficient, int statsCoefficient, Player player)
+    public Data(int score, int timeCoefficient, int statsCoefficient)
     {
         this.score = score;
         this.timeCoefficient = timeCoefficient;
         this.statsCoefficient = statsCoefficient;
-        this.player = player;
+
+    }
+
+    public Data(int score){
+        this.score = score;
+        statsCoefficient = 0;
+        timeCoefficient = 0;
     }
 
     public Data()
     {
         timeCoefficient = 0;
         statsCoefficient = 0;
-        player = new Player();
     }
 
     public int getId()
@@ -68,13 +71,4 @@ import com.example.mycapi2.models.Player;
         return statsCoefficient;
     }
 
-    public Player getPlayer()
-    {
-        return player;
-    }
-
-    public void setPlayer(Player player)
-    {
-        this.player = player;
-    }
 }

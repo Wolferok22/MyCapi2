@@ -30,12 +30,13 @@ public class ShopProductsRepo
 
     public void init()
     {
+        shopProducts.clear();
         shopProducts.add(
                 new ShopProduct(resources.getText(
-                        R.string.increase_add_stats).toString(), 0, 100));
+                        R.string.increase_add_stats).toString(), 0, 100, 0));
         shopProducts.add(
                 new ShopProduct(resources.getText(
-                        R.string.decrease_countdown_time).toString(), 0, 100));
+                        R.string.decrease_countdown_time).toString(), 0, 100, 1));
     }
 
     public ShopProduct getOne(int position)

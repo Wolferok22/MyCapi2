@@ -35,11 +35,6 @@ public class MainActivity extends AppCompatActivity
                 .replace(binding.rootContainer.getId(), fragment, String.valueOf(false))
                 .commit();
         ShopProductsRepo.getInstance().setResources(getResources());
-        ShopProductsRepo.getInstance().init();
-        MainViewModel mainViewModel = new ViewModelProvider(this).get(
-                MainViewModel.class);
-        mainViewModel.setPlayer(new Player());
-
     }
 
     @Override

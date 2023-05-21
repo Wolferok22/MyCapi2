@@ -6,4 +6,7 @@
     <string name="increase_add_stats">УЛУЧШЕНИЕ КЛИКА</string>
     <string name="decrease_countdown_time">УМЕНЬШЕНИЕ ЗАДЕРЖКИ</string>
     <string name="high_score">РЕКОРДЫ</string>
+    <string name="you_are_lose">ВЫ ПРОИГРАЛИ</string>
+    <string name="current_level">ТЕКУЩИЙ УРОВЕНЬ:</string>
+    <string name="price">ЦЕНА:</string>
 </resources>

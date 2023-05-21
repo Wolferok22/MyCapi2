@@ -15,7 +15,7 @@ import com.example.mycapi2.databinding.FragmentSettingsBinding;
 
 public class SettingsFragment extends Fragment {
 
-    FragmentSettingsBinding binding;
+    private FragmentSettingsBinding binding;
 
     @Nullable
     @Override

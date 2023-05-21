@@ -3,21 +3,37 @@ package com.example.mycapi2.threads;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+
+import com.example.mycapi2.viewmodels.MainViewModel;
 
 public class ProgressionThread extends Thread
 {
     private static ProgressionThread instance;
     private boolean running;
-    private int timeCoefficient = 1;
+    private MainViewModel mainViewModel;
 
-    public ProgressionThread(){
+
+    public ProgressionThread()
+    {
 
     }
-    public static ProgressionThread getInstance(@NonNull LifecycleOwner lifecycleOwner)
+
+
+    public static void setInstance(ProgressionThread instance)
+    {
+        ProgressionThread.instance = instance;
+    }
+
+    public static ProgressionThread getInstance(ViewModelStoreOwner viewModelStoreOwner, LifecycleOwner lifecycleOwner)
     {
         if (instance == null)
         {
             instance = new ProgressionThread();
+            ;
+            instance.mainViewModel = new ViewModelProvider(viewModelStoreOwner).get(
+                    MainViewModel.class);
 
             lifecycleOwner.getLifecycle().addObserver(new DefaultLifecycleObserver()
             {
@@ -46,11 +62,12 @@ public class ProgressionThread extends Thread
     @Override
     public void run()
     {
-        while (running){
+        while (running)
+        {
             try
             {
-                Thread.sleep(180*1000);
-
+                Thread.sleep(180 * 1000);
+                mainViewModel.setTimeCoefficient(mainViewModel.getTimeCoefficient() - 0.05F);
             }
             catch (InterruptedException e)
             {
@@ -62,7 +79,7 @@ public class ProgressionThread extends Thread
     private ProgressionThread reInstance()
     {
         ProgressionThread thread = new ProgressionThread();
-
+        thread.mainViewModel = mainViewModel;
         return thread;
     }
 }

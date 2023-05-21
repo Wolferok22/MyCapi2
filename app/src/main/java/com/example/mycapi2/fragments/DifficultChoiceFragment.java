@@ -15,7 +15,7 @@ import com.example.mycapi2.databinding.FragmentDifficultChoiceBinding;
 public class DifficultChoiceFragment extends DialogFragment
 {
 
-    FragmentDifficultChoiceBinding binding;
+    private FragmentDifficultChoiceBinding binding;
 
     @Nullable
     @Override

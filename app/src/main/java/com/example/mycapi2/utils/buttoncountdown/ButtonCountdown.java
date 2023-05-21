@@ -1,6 +1,5 @@
 package com.example.mycapi2.utils.buttoncountdown;
 
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,6 +12,8 @@ import com.example.mycapi2.viewmodels.MainViewModel;
 public abstract class ButtonCountdown
 {
     protected MainViewModel mainViewModel;
+    protected TextView countdownText;
+    protected Button addButton;
 
     public ButtonCountdown(ViewModelStoreOwner viewModelStoreOwner)
     {
@@ -21,26 +22,36 @@ public abstract class ButtonCountdown
 
     public void launch(Button addButton, TextView countdownText)
     {
+        this.addButton = addButton;
+        this.countdownText = countdownText;
         addButton.setVisibility(View.INVISIBLE);
         countdownText.setVisibility(View.VISIBLE);
         countdownText.setText(String.valueOf(mainViewModel.getClickCountdown()));
-        new CountDownTimer(mainViewModel.getClickCountdown() * 1000L, 1000)
-        {
-            @Override
-            public void onTick(long l)
-            {
-                countdownText.setText(String.valueOf(l / 1000));
-            }
+        startTimer();
 
-            @Override
-            public void onFinish()
-            {
-                addButton.setVisibility(View.VISIBLE);
-                countdownText.setVisibility(View.GONE);
-            }
-        }.start();
     }
-    public int getCountdownTime(TextView countdownText){
-        return Integer.parseInt(countdownText.getText().toString());
+
+    protected abstract void startTimer();
+
+
+    public class CountDownTimer extends android.os.CountDownTimer
+    {
+        public CountDownTimer(long millisInFuture, long countDownInterval)
+        {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onTick(long l)
+        {
+            countdownText.setText(String.valueOf(l / 1000));
+        }
+
+        @Override
+        public void onFinish()
+        {
+            addButton.setVisibility(View.VISIBLE);
+            countdownText.setVisibility(View.GONE);
+        }
     }
 }

@@ -23,4 +23,17 @@ public class CleanButtonCountdown extends ButtonCountdown
         Player player = mainViewModel.getPlayer();
         player.setCleanStats(Math.min(player.getCleanStats() + mainViewModel.getClickPower(), 100));
     }
+    @Override
+    protected void startTimer()
+    {
+        new ButtonCountdown.CountDownTimer(mainViewModel.getClickCountdown() * 1000L, 1000)
+        {
+            @Override
+            public void onTick(long l)
+            {
+                super.onTick(l);
+                mainViewModel.incrementCurrentCleanCountdown();
+            }
+        }.start();
+    }
 }

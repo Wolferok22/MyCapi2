@@ -6,5 +6,8 @@
     <string name="increase_add_stats">INCREASE ADD STATS</string>
     <string name="decrease_countdown_time">DECREASE COUNTDOWN TIME</string>
     <string name="high_score">HIGH SCORES</string>
+    <string name="you_are_lose">YOU ARE LOSE</string>
+    <string name="current_level">CURRENT LEVEL:</string>
+    <string name="price">PRICE:</string>
 
 </resources>

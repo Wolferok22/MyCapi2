@@ -13,13 +13,18 @@ public class StatsThread extends Thread
 {
     private static StatsThread instance;
     private int statsCoefficient = 1;
-    private int statsDownTime = 0;
     private MainViewModel mainViewModel;
     private OnUpdateStatsCallback onUpdateStatsCallback;
     private boolean running;
 
     protected StatsThread()
     {
+
+    }
+
+    public static void setInstance(StatsThread instance)
+    {
+        StatsThread.instance = instance;
     }
 
     public static StatsThread getInstance(ViewModelStoreOwner viewModelStoreOwner, @NonNull LifecycleOwner lifecycleOwner)
@@ -27,7 +32,8 @@ public class StatsThread extends Thread
         if (instance == null)
         {
             instance = new StatsThread();
-            instance.mainViewModel = new ViewModelProvider(viewModelStoreOwner).get(MainViewModel.class);
+            instance.mainViewModel = new ViewModelProvider(viewModelStoreOwner).get(
+                    MainViewModel.class);
 
             lifecycleOwner.getLifecycle().addObserver(new DefaultLifecycleObserver()
             {
@@ -57,7 +63,6 @@ public class StatsThread extends Thread
     {
 
         StatsThread thread = new StatsThread();
-        thread.statsDownTime = instance.statsDownTime;
         thread.onUpdateStatsCallback = instance.onUpdateStatsCallback;
         thread.mainViewModel = instance.mainViewModel;
 
@@ -65,11 +70,6 @@ public class StatsThread extends Thread
         return thread;
     }
 
-
-    public void setStatsDownTime(int statsDownTime)
-    {
-        this.statsDownTime = statsDownTime;
-    }
 
     public void setOnUpdateStatsCallback(OnUpdateStatsCallback callback)
     {
@@ -80,7 +80,8 @@ public class StatsThread extends Thread
     public void run()
     {
         Player player = mainViewModel.getPlayer();
-        if (player == null){
+        if (player == null)
+        {
             return;
         }
         while (running)
@@ -107,7 +108,8 @@ public class StatsThread extends Thread
                 {
                     onUpdateStatsCallback.onUpdate();
                 }
-                Thread.sleep((long) (statsDownTime * mainViewModel.getTimeCoefficient()));
+                Thread.sleep(
+                        (long) (mainViewModel.getStatsDownTime() * mainViewModel.getTimeCoefficient()));
             }
             catch (InterruptedException ignored)
             {
