@@ -11,6 +11,7 @@ import com.example.mycapi2.databinding.ActivityMainBinding;
 import com.example.mycapi2.fragments.ExitFragment;
 import com.example.mycapi2.fragments.GameFragment;
 import com.example.mycapi2.fragments.MainFragment;
+import com.example.mycapi2.fragments.ShopFragment;
 import com.example.mycapi2.models.Player;
 import com.example.mycapi2.threads.ScoreThread;
 import com.example.mycapi2.viewmodels.MainViewModel;

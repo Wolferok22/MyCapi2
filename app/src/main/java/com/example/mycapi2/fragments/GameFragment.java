@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -33,6 +34,7 @@ public class GameFragment extends Fragment
     private StatsThread statsThread;
     private ProgressionThread progressionThread;
     private int statsDownTime = 3000;
+    private boolean shopFlag = false;
     private FragmentGameBinding binding;
 
     public static GameFragment newInstance(int mode)
@@ -44,6 +46,7 @@ public class GameFragment extends Fragment
         return gameFragment;
 
     }
+
 
     @Nullable
     @Override
@@ -78,6 +81,17 @@ public class GameFragment extends Fragment
                 break;
         }
 
+        requireActivity().getOnBackPressedDispatcher()
+                         .addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true)
+                         {
+                             @Override
+                             public void handleOnBackPressed()
+                             {
+                                 requireActivity().onBackPressed();
+                                 shopFlag = false;
+
+                             }
+                         });
         scoreThread.setOnScoreChangedListener(
                 score -> binding.score.post(
                         () ->
@@ -117,14 +131,20 @@ public class GameFragment extends Fragment
                 v -> new EnjoyButtonCountdown(requireActivity()).launch(
                         binding.addEnjoy, binding.enjoyCountdown,
                         mainViewModel.getClickCountdown(), 0));
-        binding.shopbtn.setOnClickListener(v -> getParentFragmentManager().beginTransaction()
-                                                                          .replace(
-                                                                                  R.id.rootContainer,
-                                                                                  new ShopFragment())
-                                                                          .addToBackStack(null)
-                                                                          .commit());
+        binding.shopbtn.setOnClickListener(v -> toShop());
 
 
+    }
+
+    public void toShop()
+    {
+        getParentFragmentManager().beginTransaction()
+                                  .replace(
+                                          R.id.rootContainer,
+                                          new ShopFragment())
+                                  .addToBackStack(null)
+                                  .commit();
+        shopFlag = true;
     }
 
     @Override
@@ -175,32 +195,36 @@ public class GameFragment extends Fragment
     @Override
     public void onResume()
     {
-        MainViewModel mainViewModel = new ViewModelProvider(requireActivity()).get(
-                MainViewModel.class);
-        if (mainViewModel.getCurrentHealthCountdown() != 0)
+        if (shopFlag)
         {
-            new HealthButtonCountdown(requireActivity()).launch(
-                    binding.addHealth, binding.healthCountdown,
-                    mainViewModel.getCurrentHealthCountdown(), 1);
+            MainViewModel mainViewModel = new ViewModelProvider(requireActivity()).get(
+                    MainViewModel.class);
+            if (mainViewModel.getCurrentHealthCountdown() != 0)
+            {
+                new HealthButtonCountdown(requireActivity()).launch(
+                        binding.addHealth, binding.healthCountdown,
+                        mainViewModel.getCurrentHealthCountdown(), 1);
+            }
+            if (mainViewModel.getCurrentFoodCountdown() != 0)
+            {
+                new FoodButtonCountdown(requireActivity()).launch(
+                        binding.addFood, binding.foodCountdown,
+                        mainViewModel.getCurrentFoodCountdown(), 1);
+            }
+            if (mainViewModel.getCurrentCleanCountdown() != 0)
+            {
+                new CleanButtonCountdown(requireActivity()).launch(
+                        binding.addClean, binding.cleanCountdown,
+                        mainViewModel.getCurrentCleanCountdown(), 1);
+            }
+            if (mainViewModel.getCurrentEnjoyCountdown() != 0)
+            {
+                new EnjoyButtonCountdown(requireActivity()).launch(
+                        binding.addEnjoy, binding.enjoyCountdown,
+                        mainViewModel.getCurrentEnjoyCountdown(), 1);
+            }
         }
-        if (mainViewModel.getCurrentFoodCountdown() != 0)
-        {
-            new FoodButtonCountdown(requireActivity()).launch(
-                    binding.addFood, binding.foodCountdown,
-                    mainViewModel.getCurrentFoodCountdown(), 1);
-        }
-        if (mainViewModel.getCurrentCleanCountdown() != 0)
-        {
-            new CleanButtonCountdown(requireActivity()).launch(
-                    binding.addClean, binding.cleanCountdown,
-                    mainViewModel.getCurrentCleanCountdown(), 1);
-        }
-        if (mainViewModel.getCurrentEnjoyCountdown() != 0)
-        {
-            new EnjoyButtonCountdown(requireActivity()).launch(
-                    binding.addEnjoy, binding.enjoyCountdown,
-                    mainViewModel.getCurrentEnjoyCountdown(), 1);
-        }
+        shopFlag = false;
         super.onResume();
     }
 

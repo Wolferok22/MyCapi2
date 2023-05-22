@@ -9,7 +9,6 @@ import com.example.mycapi2.models.Player;
 
 public class HealthButtonCountdown extends ButtonCountdown
 {
-
     public HealthButtonCountdown(ViewModelStoreOwner viewModelStoreOwner)
     {
         super(viewModelStoreOwner);
