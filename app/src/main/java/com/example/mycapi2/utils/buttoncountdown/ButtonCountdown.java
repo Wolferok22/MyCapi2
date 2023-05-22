@@ -20,18 +20,18 @@ public abstract class ButtonCountdown
         mainViewModel = new ViewModelProvider(viewModelStoreOwner).get(MainViewModel.class);
     }
 
-    public void launch(Button addButton, TextView countdownText)
+    public void launch(Button addButton, TextView countdownText, int time, int id)
     {
         this.addButton = addButton;
         this.countdownText = countdownText;
         addButton.setVisibility(View.INVISIBLE);
         countdownText.setVisibility(View.VISIBLE);
         countdownText.setText(String.valueOf(mainViewModel.getClickCountdown()));
-        startTimer();
+        startTimer(time);
 
     }
 
-    protected abstract void startTimer();
+    protected abstract void startTimer(int time);
 
 
     public class CountDownTimer extends android.os.CountDownTimer

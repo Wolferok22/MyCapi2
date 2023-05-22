@@ -3,11 +3,9 @@ package com.example.mycapi2.utils.buttoncountdown;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.example.mycapi2.models.Player;
-import com.example.mycapi2.viewmodels.MainViewModel;
 
 public class CleanButtonCountdown extends ButtonCountdown
 {
@@ -17,22 +15,31 @@ public class CleanButtonCountdown extends ButtonCountdown
     }
 
     @Override
-    public void launch(Button addButton, TextView countdownText)
+    public void launch(Button addButton, TextView countdownText, int time, int id)
     {
-        super.launch(addButton, countdownText);
-        Player player = mainViewModel.getPlayer();
-        player.setCleanStats(Math.min(player.getCleanStats() + mainViewModel.getClickPower(), 100));
+        super.launch(addButton, countdownText, time, id);
+        switch (id)
+        {
+            case 0:
+                Player player = mainViewModel.getPlayer();
+                player.setCleanStats(
+                        Math.min(player.getCleanStats() + mainViewModel.getClickPower(), 100));
+                break;
+            case 1:
+                break;
+        }
     }
+
     @Override
-    protected void startTimer()
+    protected void startTimer(int time)
     {
-        new ButtonCountdown.CountDownTimer(mainViewModel.getClickCountdown() * 1000L, 1000)
+        new ButtonCountdown.CountDownTimer(time * 1000L, 1000)
         {
             @Override
             public void onTick(long l)
             {
                 super.onTick(l);
-                mainViewModel.incrementCurrentCleanCountdown();
+
             }
         }.start();
     }

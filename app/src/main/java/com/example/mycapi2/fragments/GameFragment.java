@@ -61,7 +61,8 @@ public class GameFragment extends Fragment
         Player player = mainViewModel.getPlayer();
         scoreThread = ScoreThread.getInstance(requireActivity(), this);
         statsThread = StatsThread.getInstance(requireActivity(), this);
-        progressionThread = ProgressionThread.getInstance(requireActivity(),this);
+        progressionThread = ProgressionThread.getInstance(requireActivity(), this);
+
 
         int mode = getArguments().getInt(MODE_KEY);
         switch (mode)
@@ -102,16 +103,20 @@ public class GameFragment extends Fragment
 
         binding.addHealth.setOnClickListener(
                 v -> new HealthButtonCountdown(requireActivity()).launch(
-                        binding.addHealth, binding.healthCountdown));
+                        binding.addHealth, binding.healthCountdown,
+                        mainViewModel.getClickCountdown(), 0));
         binding.addFood.setOnClickListener(
                 v -> new FoodButtonCountdown(requireActivity()).launch(
-                        binding.addFood, binding.foodCountdown));
+                        binding.addFood, binding.foodCountdown, mainViewModel.getClickCountdown(),
+                        0));
         binding.addClean.setOnClickListener(
                 v -> new CleanButtonCountdown(requireActivity()).launch(
-                        binding.addClean, binding.cleanCountdown));
+                        binding.addClean, binding.cleanCountdown,
+                        mainViewModel.getClickCountdown(), 0));
         binding.addEnjoy.setOnClickListener(
                 v -> new EnjoyButtonCountdown(requireActivity()).launch(
-                        binding.addEnjoy, binding.enjoyCountdown));
+                        binding.addEnjoy, binding.enjoyCountdown,
+                        mainViewModel.getClickCountdown(), 0));
         binding.shopbtn.setOnClickListener(v -> getParentFragmentManager().beginTransaction()
                                                                           .replace(
                                                                                   R.id.rootContainer,
@@ -120,6 +125,83 @@ public class GameFragment extends Fragment
                                                                           .commit());
 
 
+    }
+
+    @Override
+    public void onStop()
+    {
+        MainViewModel mainViewModel = new ViewModelProvider(requireActivity()).get(
+                MainViewModel.class);
+        if (binding.healthCountdown.getText() == "")
+        {
+            mainViewModel.setCurrentHealthCountdown(0);
+        }
+        else
+        {
+            mainViewModel.setCurrentHealthCountdown(
+                    Integer.parseInt(binding.healthCountdown.getText().toString()));
+        }
+        if (binding.foodCountdown.getText() == "")
+        {
+            mainViewModel.setCurrentFoodCountdown(0);
+        }
+        else
+        {
+            mainViewModel.setCurrentFoodCountdown(
+                    Integer.parseInt(binding.foodCountdown.getText().toString()));
+        }
+        if (binding.cleanCountdown.getText() == "")
+        {
+            mainViewModel.setCurrentCleanCountdown(0);
+        }
+        else
+        {
+            mainViewModel.setCurrentCleanCountdown(
+                    Integer.parseInt(binding.cleanCountdown.getText().toString()));
+        }
+
+        if (binding.enjoyCountdown.getText() == "")
+        {
+            mainViewModel.setCurrentEnjoyCountdown(0);
+        }
+        else
+        {
+            mainViewModel.setCurrentEnjoyCountdown(
+                    Integer.parseInt(binding.enjoyCountdown.getText().toString()));
+        }
+        super.onStop();
+    }
+
+    @Override
+    public void onResume()
+    {
+        MainViewModel mainViewModel = new ViewModelProvider(requireActivity()).get(
+                MainViewModel.class);
+        if (mainViewModel.getCurrentHealthCountdown() != 0)
+        {
+            new HealthButtonCountdown(requireActivity()).launch(
+                    binding.addHealth, binding.healthCountdown,
+                    mainViewModel.getCurrentHealthCountdown(), 1);
+        }
+        if (mainViewModel.getCurrentFoodCountdown() != 0)
+        {
+            new FoodButtonCountdown(requireActivity()).launch(
+                    binding.addFood, binding.foodCountdown,
+                    mainViewModel.getCurrentFoodCountdown(), 1);
+        }
+        if (mainViewModel.getCurrentCleanCountdown() != 0)
+        {
+            new CleanButtonCountdown(requireActivity()).launch(
+                    binding.addClean, binding.cleanCountdown,
+                    mainViewModel.getCurrentCleanCountdown(), 1);
+        }
+        if (mainViewModel.getCurrentEnjoyCountdown() != 0)
+        {
+            new EnjoyButtonCountdown(requireActivity()).launch(
+                    binding.addEnjoy, binding.enjoyCountdown,
+                    mainViewModel.getCurrentEnjoyCountdown(), 1);
+        }
+        super.onResume();
     }
 
     private void setState(Player player)
