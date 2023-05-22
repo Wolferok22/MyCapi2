@@ -95,7 +95,7 @@ public class GameFragment extends Fragment
                             binding.cleanStats.setText(String.valueOf(player.getCleanStats()));
                             binding.enjoyStats.setText(String.valueOf(player.getEnjoyStats()));
                             setState(player);
-                            if (player.getHealthStats() == 0 || player.getFoodStats() == 0 || player.getCleanStats() == 0 || player.getEnjoyStats() == 0)
+                            if (player.getHealthStats() <= 0 || player.getFoodStats() <= 0 || player.getCleanStats() <= 0 || player.getEnjoyStats() <= 0)
                             {
                                 toGameOver();
                             }
