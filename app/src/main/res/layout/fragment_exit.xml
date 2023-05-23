@@ -28,13 +28,13 @@
                 android:id="@+id/yesExitFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="YES"
+                android:text="@string/yes"
                 android:layout_marginRight="64dp"/>
             <Button
                 android:id="@+id/noExitFragment"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="NO"/>
+                android:text="@string/no"/>
 
 
         </LinearLayout>

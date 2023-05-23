@@ -12,23 +12,23 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DIFFICULT"
+            android:text="@string/difficult"
             android:textSize="20sp"
             android:gravity="center"
             android:layout_marginHorizontal="48dp"/>
         <Button
             android:id="@+id/easy_btn"
-            android:text="EASY"
+            android:text="@string/easy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/normal_btn"
-            android:text="NORMAL"
+            android:text="@string/normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/hard_btn"
-            android:text="HARD"
+            android:text="@string/hard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

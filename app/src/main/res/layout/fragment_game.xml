@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:gravity="center|top"
         android:padding="16dp"
-        android:text="SCORE:"
+        android:text="@string/score"
         android:textSize="24sp" />
 
     <ImageView

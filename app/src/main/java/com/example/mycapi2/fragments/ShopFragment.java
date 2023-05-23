@@ -16,6 +16,7 @@ import com.example.mycapi2.adapters.ShopProductsAdapter;
 import com.example.mycapi2.databinding.FragmentShopBinding;
 import com.example.mycapi2.models.ShopProduct;
 import com.example.mycapi2.viewmodels.MainViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 public class ShopFragment extends Fragment
 {
@@ -59,7 +60,7 @@ public class ShopFragment extends Fragment
 
                 }
                 else {
-                    Toast.makeText(requireContext(),"У вас недостаточно очков", Toast.LENGTH_LONG).show();
+                    Snackbar.make(requireContext(), requireView(),"У вас недостаточно очков", Snackbar.LENGTH_SHORT).show();
                 }
             }
         });

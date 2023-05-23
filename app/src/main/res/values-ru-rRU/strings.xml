@@ -9,4 +9,14 @@
     <string name="you_are_lose">ВЫ ПРОИГРАЛИ</string>
     <string name="current_level">ТЕКУЩИЙ УРОВЕНЬ:</string>
     <string name="price">ЦЕНА:</string>
+    <string name="difficult">СЛОЖНОСТЬ</string>
+    <string name="easy">ЛЕГКО</string>
+    <string name="normal">НОМРМАЛЬНО</string>
+    <string name="hard">СЛОЖНО</string>
+    <string name="yes">ДА</string>
+    <string name="no">НЕТ</string>
+    <string name="close">ЗАКРЫТЬ</string>
+    <string name="play">ИГРАТЬ</string>
+    <string name="settings">НАСТРОЙКИ</string>
+    <string name="exit">ВЫХОД</string>
 </resources>

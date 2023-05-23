@@ -16,7 +16,7 @@
         android:fontFamily="@font/lobster"
         android:gravity="center"
         android:padding="16dp"
-        android:text="My Capi"
+        android:text="@string/app_name"
         android:textColor="@android:color/black"
         android:textSize="48sp"
         tools:ignore="MissingConstraints" />
@@ -30,39 +30,31 @@
         tools:ignore="MissingConstraints">
 
         <Button
-            android:id="@+id/continue_btn"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="CONTINUE"
-            android:visibility="gone" />
-
-        <Button
             android:id="@+id/play_btn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="PLAY" />
+            android:text="@string/play" />
         <Button
             android:id="@+id/highscore_btn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="HIGH SCORE" />
+            android:text="@string/high_score" />
 
         <Button
             android:id="@+id/settings_btn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="SETTINGS" />
+            android:text="@string/settings" />
 
         <Button
             android:id="@+id/exit_btn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="EXIT" />
+            android:text="@string/exit" />
 
     </LinearLayout>
 
