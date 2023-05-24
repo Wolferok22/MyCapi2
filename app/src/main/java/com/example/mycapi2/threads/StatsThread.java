@@ -61,12 +61,9 @@ public class StatsThread extends Thread
 
     private StatsThread reInstance()
     {
-
         StatsThread thread = new StatsThread();
         thread.onUpdateStatsCallback = instance.onUpdateStatsCallback;
         thread.mainViewModel = instance.mainViewModel;
-
-
         return thread;
     }
 

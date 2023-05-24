@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MyCapi2</string>
+    <string name="app_name">My Capi</string>
     <string name="score">СЧЁТ:</string>
     <string name="shop">МАГАЗИН</string>
     <string name="increase_add_stats">УЛУЧШЕНИЕ КЛИКА</string>
@@ -11,7 +11,7 @@
     <string name="price">ЦЕНА:</string>
     <string name="difficult">СЛОЖНОСТЬ</string>
     <string name="easy">ЛЕГКО</string>
-    <string name="normal">НОМРМАЛЬНО</string>
+    <string name="normal">НОРМАЛЬНО</string>
     <string name="hard">СЛОЖНО</string>
     <string name="yes">ДА</string>
     <string name="no">НЕТ</string>

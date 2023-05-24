@@ -5,7 +5,7 @@ public class ShopProduct
     private String title;
     private int level;
     private int price;
-    private int id;
+    private final int id;
 
     public ShopProduct(String title, int level, int price, int id)
     {
